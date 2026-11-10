@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="סימולציה אינטראקטיבית של תנועת יונים והשפעתה על מתח הממברנה" />
+    <title>מתח ממברנה</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <h1>מתח ממברנה</h1>
+      </header>
+
+      <section class="top-panel" aria-label="בקרת הסימולציה וגרף המתח">
+        <form class="controls" onsubmit="return false">
+          <fieldset class="control-group">
+            <legend>ערכיות היון</legend>
+            <div class="segmented" role="group" aria-label="ערכיות היון">
+              <input type="radio" name="charge" id="charge-positive" value="1" checked />
+              <label for="charge-positive"><bdi>+</bdi> חיובי</label>
+              <input type="radio" name="charge" id="charge-negative" value="-1" />
+              <label for="charge-negative"><bdi>−</bdi> שלילי</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="control-group">
+            <legend>כיוון הזרם</legend>
+            <div class="segmented" role="group" aria-label="כיוון הזרם">
+              <input type="radio" name="direction" id="direction-in" value="1" checked />
+              <label for="direction-in">פנימה ↓</label>
+              <input type="radio" name="direction" id="direction-out" value="-1" />
+              <label for="direction-out">החוצה ↑</label>
+            </div>
+          </fieldset>
+
+          <div class="action-buttons">
+            <button
+              class="current-button"
+              id="toggle-current"
+              type="button"
+              aria-pressed="false"
+              aria-label="הפעלת הזרם"
+            >
+              <span class="current-icon" aria-hidden="true">▶</span>
+              <span class="current-label">הפעל זרם</span>
+            </button>
+            <button
+              class="reset-button"
+              id="reset-simulation"
+              type="button"
+              aria-label="איפוס למצב ההתחלתי, מינוס 70 מיליוולט"
+            >
+              <span aria-hidden="true">↺</span>
+              איפוס
+            </button>
+          </div>
+        </form>
+
+        <figure class="graph-card">
+          <figcaption>
+            <span>מתח ממברנה</span>
+            <output id="graph-voltage"><bdi>−70.0 mV</bdi></output>
+          </figcaption>
+          <canvas
+            id="voltage-graph"
+            role="img"
+            aria-label="גרף מתח הממברנה לאורך זמן, מתח התחלתי מינוס 70 מיליוולט"
+          ></canvas>
+        </figure>
+      </section>
+
+      <section class="simulation" aria-label="הדמיית הממברנה">
+        <div
+          class="stage-indicator"
+          id="stage-indicator"
+          hidden
+        >
+          <span id="stage-label" role="status" aria-live="polite" aria-atomic="true"></span>
+          <button
+            class="stage-continue"
+            id="stage-continue"
+            type="button"
+            aria-label="המשך לשלב הבא"
+            hidden
+          >
+            <span aria-hidden="true">▶</span>
+          </button>
+        </div>
+        <canvas
+          id="membrane-canvas"
+          role="img"
+          aria-label="ממברנה, יונים בנוזל החוץ תאי ובציטופלסמה, ושתי אלקטרודות המחוברות למולטימטר"
+        ></canvas>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
